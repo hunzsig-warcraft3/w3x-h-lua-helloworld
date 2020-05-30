@@ -1,0 +1,24 @@
+?>
+
+library mySlk initializer Init
+
+    private function Init takes nothing returns nothing
+        // include以地图w3x文件相对
+        <?
+            -- 加载ydwe的slk
+            local slk = require 'slk'
+            -- 加载点h-lua库协助slk
+            #include "../h-lua/const/hotKey.lua"
+            #include "../h-lua/const/attribute.lua"
+            #include "../h-lua/const/unit.lua"
+            #include "../h-lua/foundation/json.lua"
+            #include "../h-lua/foundation/table.lua"
+            #include "../h-lua/foundation/string.lua"
+            #include "../h-lua/foundation/color.lua"
+            -- 这是在slkHelper帮助下自己写的英雄构建
+            #include "./slk/hero.lua"
+        ?>
+    endfunction
+
+endlibrary
+<?
