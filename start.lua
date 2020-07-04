@@ -17,7 +17,8 @@ cj.TriggerAddAction(startTrigger, function()
         y = 0,
     })
     hattr.set(me, 0, {
-        attack_speed = "+175",
+        attack_damage_type = "+fire",
+        attack_speed = "+300",
         life = "+2000",
         life_back = "+100",
         attack_effect = {
