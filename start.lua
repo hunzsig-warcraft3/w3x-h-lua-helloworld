@@ -16,18 +16,21 @@ cj.TriggerAddAction(startTrigger, function()
         x = 0,
         y = 0,
     })
+    hattr.set(me, 3, {
+        attack_effect = {
+            add = {
+                { attr = "knocking", odds = 100, percent = 100, effect = nil },
+            }
+        }
+    })
     hattr.set(me, 0, {
         attack_damage_type = "+fire",
         attack_speed = "+500",
         life = "+2000",
         life_back = "+100",
-        attack_white = "+10000000",
+        attack_white = "+100",
         attack_effect = {
             add = {
-                { attr = "knocking", odds = 10, percent = 30, effect = nil },
-                { attr = "knocking", odds = 15, percent = 30, effect = nil },
-                { attr = "knocking", odds = 20, percent = 30, effect = nil },
-                { attr = "knocking", odds = 25, percent = 30, effect = nil },
                 { attr = "knocking", odds = 30, percent = 30, effect = nil },
                 { attr = "crack_fly", odds = 20, val = 20, during = 0.6, effect = nil, distance = 100, high = 500 }
             }
@@ -43,7 +46,7 @@ cj.TriggerAddAction(startTrigger, function()
         attack_white = "+150",
         life = "+5000000",
         life_back = "+100000",
-        toughness = "+12000000",
+        toughness = "+50",
         attack_effect = {
             add = {
                 { attr = "swim", odds = 10, val = 10, during = 2, effect = nil },
