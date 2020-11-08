@@ -2058,58 +2058,58 @@ hRuntime = {
     
     register = {
         unit = function(json)
-            hslk_global.id2Value.unit[json.UNIT_ID] = json
-            hslk_global.name2Value.unit[json.Name] = json
+            hslk.id2Value.unit[json.UNIT_ID] = json
+            hslk.name2Value.unit[json.Name] = json
             if (json.CLASS_GROUP ~= nil) then
-                if (hslk_global.class_group.unit[json.CLASS_GROUP] == nil) then
-                    hslk_global.class_group.unit[json.CLASS_GROUP] = {}
+                if (hslk.class_group.unit[json.CLASS_GROUP] == nil) then
+                    hslk.class_group.unit[json.CLASS_GROUP] = {}
                 end
-                table.insert(hslk_global.class_group.unit[json.CLASS_GROUP], json.UNIT_ID)
+                table.insert(hslk.class_group.unit[json.CLASS_GROUP], json.UNIT_ID)
             end
         end,
         item = function(json)
-            hslk_global.id2Value.item[json.ITEM_ID] = json
-            hslk_global.name2Value.item[json.Name] = json
+            hslk.id2Value.item[json.ITEM_ID] = json
+            hslk.name2Value.item[json.Name] = json
             if (json.CLASS_GROUP ~= nil) then
-                if (hslk_global.class_group.item[json.CLASS_GROUP] == nil) then
-                    hslk_global.class_group.item[json.CLASS_GROUP] = {}
+                if (hslk.class_group.item[json.CLASS_GROUP] == nil) then
+                    hslk.class_group.item[json.CLASS_GROUP] = {}
                 end
-                table.insert(hslk_global.class_group.item[json.CLASS_GROUP], json.ITEM_ID)
+                table.insert(hslk.class_group.item[json.CLASS_GROUP], json.ITEM_ID)
             end
             if (json.cooldownID ~= nil) then
-                hslk_global.item_cooldown_ids[json.cooldownID] = json.ITEM_ID
+                hslk.item_cooldown_ids[json.cooldownID] = json.ITEM_ID
             end
             if (json.RING ~= nil) then
                 json.RING.RING_ID = json.ITEM_ID
                 json.RING.Name = json.Name
-                hslk_global.id2Value.ring[json.ITEM_ID] = json.RING
-                hslk_global.name2Value.ring[json.Name] = json.RING
+                hslk.id2Value.ring[json.ITEM_ID] = json.RING
+                hslk.name2Value.ring[json.Name] = json.RING
             end
         end,
         ability = function(json)
-            hslk_global.id2Value.ability[json.ABILITY_ID] = json
-            hslk_global.name2Value.ability[json.Name] = json
+            hslk.id2Value.ability[json.ABILITY_ID] = json
+            hslk.name2Value.ability[json.Name] = json
             if (json.CLASS_GROUP ~= nil) then
-                if (hslk_global.class_group.ability[json.CLASS_GROUP] == nil) then
-                    hslk_global.class_group.ability[json.CLASS_GROUP] = {}
+                if (hslk.class_group.ability[json.CLASS_GROUP] == nil) then
+                    hslk.class_group.ability[json.CLASS_GROUP] = {}
                 end
-                table.insert(hslk_global.class_group.ability[json.CLASS_GROUP], json.ABILITY_ID)
+                table.insert(hslk.class_group.ability[json.CLASS_GROUP], json.ABILITY_ID)
             end
             if (json.RING ~= nil) then
                 json.RING.RING_ID = json.ABILITY_ID
                 json.RING.Name = json.Name
-                hslk_global.id2Value.ring[json.ABILITY_ID] = json.RING
-                hslk_global.name2Value.ring[json.Name] = json.RING
+                hslk.id2Value.ring[json.ABILITY_ID] = json.RING
+                hslk.name2Value.ring[json.Name] = json.RING
             end
         end,
         technology = function(json)
-            hslk_global.id2Value.technology[json.TECHNOLOGY_ID] = json
-            hslk_global.name2Value.technology[json.Name] = json
+            hslk.id2Value.technology[json.TECHNOLOGY_ID] = json
+            hslk.name2Value.technology[json.Name] = json
             if (json.CLASS_GROUP ~= nil) then
-                if (hslk_global.class_group.technology[json.CLASS_GROUP] == nil) then
-                    hslk_global.class_group.technology[json.CLASS_GROUP] = {}
+                if (hslk.class_group.technology[json.CLASS_GROUP] == nil) then
+                    hslk.class_group.technology[json.CLASS_GROUP] = {}
                 end
-                table.insert(hslk_global.class_group.technology[json.CLASS_GROUP], json.TECHNOLOGY_ID)
+                table.insert(hslk.class_group.technology[json.CLASS_GROUP], json.TECHNOLOGY_ID)
             end
         end,
         synthesis = function(json)
@@ -2118,31 +2118,31 @@ hRuntime = {
             local jsonFragment = {}
             for k, v in ipairs(json.fragment) do
                 json.fragment[k][2] = math.floor(v[2])
-                local fragmentId = hslk_global.name2Value.item[v[1]].ITEM_ID or nil
+                local fragmentId = hslk.name2Value.item[v[1]].ITEM_ID or nil
                 if (fragmentId ~= nil) then
                     table.insert(jsonFragment, { fragmentId, v[2] })
                 end
             end
-            local profitId = hslk_global.name2Value.item[json.profit[1]].ITEM_ID or nil
+            local profitId = hslk.name2Value.item[json.profit[1]].ITEM_ID or nil
             if (profitId == nil) then
                 return
             end
-            if (hslk_global.synthesis.profit[profitId] == nil) then
-                hslk_global.synthesis.profit[profitId] = {}
+            if (hslk.synthesis.profit[profitId] == nil) then
+                hslk.synthesis.profit[profitId] = {}
             end
-            table.insert(hslk_global.synthesis.profit[profitId], {
+            table.insert(hslk.synthesis.profit[profitId], {
                 qty = json.profit[2],
                 fragment = jsonFragment,
             })
-            local profitIndex = #hslk_global.synthesis.profit[profitId]
+            local profitIndex = #hslk.synthesis.profit[profitId]
             for _, f in ipairs(jsonFragment) do
-                if (hslk_global.synthesis.fragment[f[1]] == nil) then
-                    hslk_global.synthesis.fragment[f[1]] = {}
+                if (hslk.synthesis.fragment[f[1]] == nil) then
+                    hslk.synthesis.fragment[f[1]] = {}
                 end
-                if (hslk_global.synthesis.fragment[f[1]][f[2]] == nil) then
-                    hslk_global.synthesis.fragment[f[1]][f[2]] = {}
+                if (hslk.synthesis.fragment[f[1]][f[2]] == nil) then
+                    hslk.synthesis.fragment[f[1]][f[2]] = {}
                 end
-                table.insert(hslk_global.synthesis.fragment[f[1]][f[2]], {
+                table.insert(hslk.synthesis.fragment[f[1]][f[2]], {
                     profit = profitId,
                     index = profitIndex,
                 })
@@ -2778,7 +2778,7 @@ end
 hColor.purple = function(str)
     return hColor.mixed(str, "ff59ff")
 end
-local HSK = {
+local HSLK_KEYS = {
     COMMON = 99,
     UNIT_TOKEN = 101,
     UNIT_TOKEN_LEAP = 102,
@@ -2819,7 +2819,7 @@ local HSK = {
     ENV_MODEL_NAME = 138,
     ENV_MODEL = 139,
 }
-hslk_global = {
+hslk = {
     env_model = {},
     skill_break = {},
     skill_swim_unlimit = 0,
@@ -2915,69 +2915,69 @@ hslk_global = {
 }
 for dur = 1, 10, 1 do
     local swDur = dur * 0.05
-    hslk_global.skill_break[swDur] = cj.LoadInteger(cg.hash_hslk, HSK.SKILL_BREAK, dur)
+    hslk.skill_break[swDur] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.SKILL_BREAK, dur)
 end
-hslk_global.skill_swim_unlimit = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.SKILL_SWIM_UNLIMIT)
-hslk_global.skill_invisible = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.SKILL_INVISIBLE)
-hslk_global.skill_hero_tavern_selection = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.SKILL_HERO_TAVERN_SELECTION)
-hslk_global.unit_token = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_TOKEN)
-hslk_global.unit_token_leap = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_TOKEN_LEAP)
-hslk_global.unit_token_alert_circle = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_TOKEN_ALERT_CIRCLE)
-hslk_global.unit_tree = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_TREE)
-hslk_global.unit_hero_tavern = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_HERO_TAVERN)
-hslk_global.unit_hero_tavern_token = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_HERO_TAVERN_TOKEN)
-hslk_global.unit_hero_death_token = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.UNIT_HERO_DEATH_TOKEN)
-qty = cj.LoadInteger(cg.hash_hslk, HSK.ITEM_FLEETING, -1)
+hslk.skill_swim_unlimit = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.SKILL_SWIM_UNLIMIT)
+hslk.skill_invisible = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.SKILL_INVISIBLE)
+hslk.skill_hero_tavern_selection = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.SKILL_HERO_TAVERN_SELECTION)
+hslk.unit_token = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_TOKEN)
+hslk.unit_token_leap = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_TOKEN_LEAP)
+hslk.unit_token_alert_circle = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_TOKEN_ALERT_CIRCLE)
+hslk.unit_tree = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_TREE)
+hslk.unit_hero_tavern = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_HERO_TAVERN)
+hslk.unit_hero_tavern_token = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_HERO_TAVERN_TOKEN)
+hslk.unit_hero_death_token = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.UNIT_HERO_DEATH_TOKEN)
+qty = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ITEM_FLEETING, -1)
 for i = 1, qty do
-    table.insert(hslk_global.item_fleeting, cj.LoadInteger(cg.hash_hslk, HSK.ITEM_FLEETING, i))
+    table.insert(hslk.item_fleeting, cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ITEM_FLEETING, i))
 end
-qty = cj.LoadInteger(cg.hash_hslk, HSK.COMMON, HSK.ENV_MODEL)
+qty = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.COMMON, HSLK_KEYS.ENV_MODEL)
 for i = 1, qty do
-    local key = cj.LoadStr(cg.hash_hslk, HSK.ENV_MODEL_NAME, i)
-    local val = cj.LoadInteger(cg.hash_hslk, HSK.ENV_MODEL, i)
-    hslk_global.env_model[key] = val
+    local key = cj.LoadStr(cg.hash_hslk, HSLK_KEYS.ENV_MODEL_NAME, i)
+    local val = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ENV_MODEL, i)
+    hslk.env_model[key] = val
 end
 for i = 1, 9 do
     local val = math.floor(10 ^ (i - 1))
-    table.insert(hslk_global.attr.ablis_gradient, val)
-    hslk_global.attr.str_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_STR_GREEN_ADD, val)
-    hslk_global.attr.str_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_STR_GREEN_SUB, val)
-    hslk_global.attr.agi_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_AGI_GREEN_ADD, val)
-    hslk_global.attr.agi_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_AGI_GREEN_SUB, val)
-    hslk_global.attr.int_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_INT_GREEN_ADD, val)
-    hslk_global.attr.int_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_INT_GREEN_SUB, val)
-    hslk_global.attr.attack_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ATTACK_GREEN_ADD, val)
-    hslk_global.attr.attack_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ATTACK_GREEN_SUB, val)
-    hslk_global.attr.attack_white.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ATTACK_WHITE_ADD, val)
-    hslk_global.attr.attack_white.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ATTACK_WHITE_SUB, val)
-    hslk_global.attr.item_attack_white.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ITEM_ATTACK_WHITE_ADD, val)
-    hslk_global.attr.item_attack_white.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ITEM_ATTACK_WHITE_SUB, val)
-    table.insert(hslk_global.attr.item_attack_white.items, hslk_global.attr.item_attack_white.add[val])
-    table.insert(hslk_global.attr.item_attack_white.items, hslk_global.attr.item_attack_white.sub[val])
-    hslk_global.attr.attack_speed.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ATTACK_SPEED_ADD, val)
-    hslk_global.attr.attack_speed.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_ATTACK_SPEED_SUB, val)
-    hslk_global.attr.defend.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_DEFEND_ADD, val)
-    hslk_global.attr.defend.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_DEFEND_SUB, val)
-    hslk_global.attr.life.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_LIFE_ADD, val)
-    hslk_global.attr.life.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_LIFE_SUB, val)
-    hslk_global.attr.mana.add[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_MANA_ADD, val)
-    hslk_global.attr.mana.sub[val] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_MANA_SUB, val)
+    table.insert(hslk.attr.ablis_gradient, val)
+    hslk.attr.str_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_STR_GREEN_ADD, val)
+    hslk.attr.str_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_STR_GREEN_SUB, val)
+    hslk.attr.agi_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_AGI_GREEN_ADD, val)
+    hslk.attr.agi_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_AGI_GREEN_SUB, val)
+    hslk.attr.int_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_INT_GREEN_ADD, val)
+    hslk.attr.int_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_INT_GREEN_SUB, val)
+    hslk.attr.attack_green.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ATTACK_GREEN_ADD, val)
+    hslk.attr.attack_green.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ATTACK_GREEN_SUB, val)
+    hslk.attr.attack_white.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ATTACK_WHITE_ADD, val)
+    hslk.attr.attack_white.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ATTACK_WHITE_SUB, val)
+    hslk.attr.item_attack_white.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ITEM_ATTACK_WHITE_ADD, val)
+    hslk.attr.item_attack_white.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ITEM_ATTACK_WHITE_SUB, val)
+    table.insert(hslk.attr.item_attack_white.items, hslk.attr.item_attack_white.add[val])
+    table.insert(hslk.attr.item_attack_white.items, hslk.attr.item_attack_white.sub[val])
+    hslk.attr.attack_speed.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ATTACK_SPEED_ADD, val)
+    hslk.attr.attack_speed.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_ATTACK_SPEED_SUB, val)
+    hslk.attr.defend.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_DEFEND_ADD, val)
+    hslk.attr.defend.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_DEFEND_SUB, val)
+    hslk.attr.life.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_LIFE_ADD, val)
+    hslk.attr.life.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_LIFE_SUB, val)
+    hslk.attr.mana.add[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_MANA_ADD, val)
+    hslk.attr.mana.sub[val] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_MANA_SUB, val)
 end
-hslk_global.attr.avoid.add = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_AVOID_ADD, 0)
-hslk_global.attr.avoid.sub = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_AVOID_SUB, 0)
+hslk.attr.avoid.add = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_AVOID_ADD, 0)
+hslk.attr.avoid.sub = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_AVOID_SUB, 0)
 local sightBase = { 1, 2, 3, 4, 5 }
 local si = 1
 while (si <= 10000) do
     for _, v in ipairs(sightBase) do
         v = math.floor(v * si)
-        table.insert(hslk_global.attr.sight_gradient, v)
-        hslk_global.attr.sight.add[v] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_SIGHT_ADD, v)
-        hslk_global.attr.sight.sub[v] = cj.LoadInteger(cg.hash_hslk, HSK.ATTR_SIGHT_SUB, v)
+        table.insert(hslk.attr.sight_gradient, v)
+        hslk.attr.sight.add[v] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_SIGHT_ADD, v)
+        hslk.attr.sight.sub[v] = cj.LoadInteger(cg.hash_hslk, HSLK_KEYS.ATTR_SIGHT_SUB, v)
     end
     si = si * 10
 end
 table.sort(
-    hslk_global.attr.sight_gradient,
+    hslk.attr.sight_gradient,
     function(a, b)
         return a > b
     end
@@ -3862,7 +3862,7 @@ hsound.bgm = function(musicFileName, whichPlayer)
 end
 htexture = {
     
-    TEXTURE_ALERT_CIRCLE_TOKEN = hslk_global.unit_token_alert_circle,
+    TEXTURE_ALERT_CIRCLE_TOKEN = hslk.unit_token_alert_circle,
     
     DEFAULT_MARKS = {
         WHITE = "ReplaceableTextures\\CameraMasks\\White_mask.blp", 
@@ -4459,12 +4459,12 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.bucket
         }
         unit = {
-            hslk_global.env_model.flower0,
-            hslk_global.env_model.flower1,
-            hslk_global.env_model.flower2,
-            hslk_global.env_model.flower3,
-            hslk_global.env_model.flower4,
-            hslk_global.env_model.bird
+            hslk.env_model.flower0,
+            hslk.env_model.flower1,
+            hslk.env_model.flower2,
+            hslk.env_model.flower3,
+            hslk.env_model.flower4,
+            hslk.env_model.bird
         }
     elseif (typeStr == "autumn") then
         ground = henvData.ground.autumn
@@ -4477,9 +4477,9 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.supportColumn
         }
         unit = {
-            hslk_global.env_model.flower0,
-            hslk_global.env_model.typha0,
-            hslk_global.env_model.typha1
+            hslk.env_model.flower0,
+            hslk.env_model.typha0,
+            hslk.env_model.typha1
         }
     elseif (typeStr == "winter") then
         ground = henvData.ground.winter
@@ -4489,15 +4489,15 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.stoneIce
         }
         unit = {
-            hslk_global.env_model.stone0,
-            hslk_global.env_model.stone1,
-            hslk_global.env_model.stone2,
-            hslk_global.env_model.stone3,
-            hslk_global.env_model.stone_show0,
-            hslk_global.env_model.stone_show1,
-            hslk_global.env_model.stone_show2,
-            hslk_global.env_model.stone_show3,
-            hslk_global.env_model.stone_show4
+            hslk.env_model.stone0,
+            hslk.env_model.stone1,
+            hslk.env_model.stone2,
+            hslk.env_model.stone3,
+            hslk.env_model.stone_show0,
+            hslk.env_model.stone_show1,
+            hslk.env_model.stone_show2,
+            hslk.env_model.stone_show3,
+            hslk.env_model.stone_show4
         }
     elseif (typeStr == "winterDeep") then
         ground = henvData.ground.winterDeep
@@ -4506,17 +4506,17 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.stoneIce
         }
         unit = {
-            hslk_global.env_model.stone_show5,
-            hslk_global.env_model.stone_show6,
-            hslk_global.env_model.stone_show7,
-            hslk_global.env_model.stone_show8,
-            hslk_global.env_model.stone_show9,
-            hslk_global.env_model.ice0,
-            hslk_global.env_model.ice1,
-            hslk_global.env_model.ice2,
-            hslk_global.env_model.ice3,
-            hslk_global.env_model.bubble_geyser_steam,
-            hslk_global.env_model.snowman
+            hslk.env_model.stone_show5,
+            hslk.env_model.stone_show6,
+            hslk.env_model.stone_show7,
+            hslk.env_model.stone_show8,
+            hslk.env_model.stone_show9,
+            hslk.env_model.ice0,
+            hslk.env_model.ice1,
+            hslk.env_model.ice2,
+            hslk.env_model.ice3,
+            hslk.env_model.bubble_geyser_steam,
+            hslk.env_model.snowman
         }
     elseif (typeStr == "dark") then
         ground = henvData.ground.dark
@@ -4526,15 +4526,15 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.cage
         }
         unit = {
-            hslk_global.env_model.rune0,
-            hslk_global.env_model.rune1,
-            hslk_global.env_model.rune2,
-            hslk_global.env_model.rune3,
-            hslk_global.env_model.rune4,
-            hslk_global.env_model.rune5,
-            hslk_global.env_model.rune6,
-            hslk_global.env_model.impaled_body0,
-            hslk_global.env_model.impaled_body1
+            hslk.env_model.rune0,
+            hslk.env_model.rune1,
+            hslk.env_model.rune2,
+            hslk.env_model.rune3,
+            hslk.env_model.rune4,
+            hslk.env_model.rune5,
+            hslk.env_model.rune6,
+            hslk.env_model.impaled_body0,
+            hslk.env_model.impaled_body1
         }
     elseif (typeStr == "poor") then
         ground = henvData.ground.poor
@@ -4545,21 +4545,21 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.box
         }
         unit = {
-            hslk_global.env_model.bone0,
-            hslk_global.env_model.bone1,
-            hslk_global.env_model.bone2,
-            hslk_global.env_model.bone3,
-            hslk_global.env_model.bone4,
-            hslk_global.env_model.bone5,
-            hslk_global.env_model.bone6,
-            hslk_global.env_model.bone7,
-            hslk_global.env_model.bone8,
-            hslk_global.env_model.bone9,
-            hslk_global.env_model.flies,
-            hslk_global.env_model.burn_body0,
-            hslk_global.env_model.burn_body1,
-            hslk_global.env_model.burn_body3,
-            hslk_global.env_model.bats
+            hslk.env_model.bone0,
+            hslk.env_model.bone1,
+            hslk.env_model.bone2,
+            hslk.env_model.bone3,
+            hslk.env_model.bone4,
+            hslk.env_model.bone5,
+            hslk.env_model.bone6,
+            hslk.env_model.bone7,
+            hslk.env_model.bone8,
+            hslk.env_model.bone9,
+            hslk.env_model.flies,
+            hslk.env_model.burn_body0,
+            hslk.env_model.burn_body1,
+            hslk.env_model.burn_body3,
+            hslk.env_model.bats
         }
     elseif (typeStr == "ruins") then
         ground = henvData.ground.ruins
@@ -4569,14 +4569,14 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.cage
         }
         unit = {
-            hslk_global.env_model.break_column0,
-            hslk_global.env_model.break_column1,
-            hslk_global.env_model.break_column2,
-            hslk_global.env_model.break_column3,
-            hslk_global.env_model.skull_pile0,
-            hslk_global.env_model.skull_pile1,
-            hslk_global.env_model.skull_pile2,
-            hslk_global.env_model.skull_pile3
+            hslk.env_model.break_column0,
+            hslk.env_model.break_column1,
+            hslk.env_model.break_column2,
+            hslk.env_model.break_column3,
+            hslk.env_model.skull_pile0,
+            hslk.env_model.skull_pile1,
+            hslk.env_model.skull_pile2,
+            hslk.env_model.skull_pile3
         }
     elseif (typeStr == "fire") then
         ground = henvData.ground.fire
@@ -4585,13 +4585,13 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.stoneRed
         }
         unit = {
-            hslk_global.env_model.fire_hole,
-            hslk_global.env_model.burn_body0,
-            hslk_global.env_model.burn_body1,
-            hslk_global.env_model.burn_body2,
-            hslk_global.env_model.firetrap,
-            hslk_global.env_model.fire,
-            hslk_global.env_model.burn_build
+            hslk.env_model.fire_hole,
+            hslk.env_model.burn_body0,
+            hslk.env_model.burn_body1,
+            hslk.env_model.burn_body2,
+            hslk.env_model.firetrap,
+            hslk.env_model.fire,
+            hslk.env_model.burn_build
         }
     elseif (typeStr == "underground") then
         ground = henvData.ground.underground
@@ -4600,53 +4600,53 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.spiderEggs
         }
         unit = {
-            hslk_global.env_model.mushroom0,
-            hslk_global.env_model.mushroom1,
-            hslk_global.env_model.mushroom2,
-            hslk_global.env_model.mushroom3,
-            hslk_global.env_model.mushroom4,
-            hslk_global.env_model.mushroom5,
-            hslk_global.env_model.mushroom6,
-            hslk_global.env_model.mushroom7,
-            hslk_global.env_model.mushroom8,
-            hslk_global.env_model.mushroom9,
-            hslk_global.env_model.mushroom10,
-            hslk_global.env_model.mushroom11
+            hslk.env_model.mushroom0,
+            hslk.env_model.mushroom1,
+            hslk.env_model.mushroom2,
+            hslk.env_model.mushroom3,
+            hslk.env_model.mushroom4,
+            hslk.env_model.mushroom5,
+            hslk.env_model.mushroom6,
+            hslk.env_model.mushroom7,
+            hslk.env_model.mushroom8,
+            hslk.env_model.mushroom9,
+            hslk.env_model.mushroom10,
+            hslk.env_model.mushroom11
         }
     elseif (typeStr == "sea") then
         ground = henvData.ground.sea
         doodad = {}
         unit = {
-            hslk_global.env_model.seaweed0,
-            hslk_global.env_model.seaweed1,
-            hslk_global.env_model.seaweed2,
-            hslk_global.env_model.seaweed3,
-            hslk_global.env_model.seaweed4,
-            hslk_global.env_model.fish,
-            hslk_global.env_model.fish_school,
-            hslk_global.env_model.fish_green,
-            hslk_global.env_model.bubble_geyser,
-            hslk_global.env_model.bubble_geyser_steam,
-            hslk_global.env_model.coral0,
-            hslk_global.env_model.coral1,
-            hslk_global.env_model.coral2,
-            hslk_global.env_model.coral3,
-            hslk_global.env_model.coral4,
-            hslk_global.env_model.coral5,
-            hslk_global.env_model.coral6,
-            hslk_global.env_model.coral7,
-            hslk_global.env_model.coral8,
-            hslk_global.env_model.coral9,
-            hslk_global.env_model.shells0,
-            hslk_global.env_model.shells1,
-            hslk_global.env_model.shells2,
-            hslk_global.env_model.shells3,
-            hslk_global.env_model.shells4,
-            hslk_global.env_model.shells5,
-            hslk_global.env_model.shells6,
-            hslk_global.env_model.shells7,
-            hslk_global.env_model.shells8,
-            hslk_global.env_model.shells9
+            hslk.env_model.seaweed0,
+            hslk.env_model.seaweed1,
+            hslk.env_model.seaweed2,
+            hslk.env_model.seaweed3,
+            hslk.env_model.seaweed4,
+            hslk.env_model.fish,
+            hslk.env_model.fish_school,
+            hslk.env_model.fish_green,
+            hslk.env_model.bubble_geyser,
+            hslk.env_model.bubble_geyser_steam,
+            hslk.env_model.coral0,
+            hslk.env_model.coral1,
+            hslk.env_model.coral2,
+            hslk.env_model.coral3,
+            hslk.env_model.coral4,
+            hslk.env_model.coral5,
+            hslk.env_model.coral6,
+            hslk.env_model.coral7,
+            hslk.env_model.coral8,
+            hslk.env_model.coral9,
+            hslk.env_model.shells0,
+            hslk.env_model.shells1,
+            hslk.env_model.shells2,
+            hslk.env_model.shells3,
+            hslk.env_model.shells4,
+            hslk.env_model.shells5,
+            hslk.env_model.shells6,
+            hslk.env_model.shells7,
+            hslk.env_model.shells8,
+            hslk.env_model.shells9
         }
     elseif (typeStr == "river") then
         ground = henvData.ground.river
@@ -4654,16 +4654,16 @@ henv.random = function(whichRect, typeStr, isInvulnerable, isDestroyRect)
             henvData.doodad.stone
         }
         unit = {
-            hslk_global.env_model.fish,
-            hslk_global.env_model.fish_school,
-            hslk_global.env_model.fish_green,
-            hslk_global.env_model.lilypad0,
-            hslk_global.env_model.lilypad1,
-            hslk_global.env_model.lilypad2,
-            hslk_global.env_model.river_rushes0,
-            hslk_global.env_model.river_rushes1,
-            hslk_global.env_model.river_rushes2,
-            hslk_global.env_model.river_rushes3
+            hslk.env_model.fish,
+            hslk.env_model.fish_school,
+            hslk.env_model.fish_green,
+            hslk.env_model.lilypad0,
+            hslk.env_model.lilypad1,
+            hslk.env_model.lilypad2,
+            hslk.env_model.river_rushes0,
+            hslk.env_model.river_rushes1,
+            hslk.env_model.river_rushes2,
+            hslk.env_model.river_rushes3
         }
     else
         return
@@ -5948,7 +5948,7 @@ hevent_default_actions = {
                 return
             end
             abilityId = string.id2char(abilityId)
-            local slk = hslk_global.id2Value.ability[abilityId]
+            local slk = hslk.id2Value.ability[abilityId]
             if (slk == nil) then
                 return
             end
@@ -5984,12 +5984,12 @@ hevent_default_actions = {
                 end
                 local id = hitem.getId(it)
                 local name = hitem.getName(it)
-                local originSlk = hslk_global.id2Value.item[id]
+                local originSlk = hslk.id2Value.item[id]
                 if (originSlk ~= nil and originSlk.SHADOW == true) then
-                    id = hslk_global.id2Value.item[originSlk.SHADOW_ID].ITEM_ID
+                    id = hslk.id2Value.item[originSlk.SHADOW_ID].ITEM_ID
                 end
                 local charges = hitem.getCharges(it)
-                local formulas = hslk_global.synthesis.profit[id]
+                local formulas = hslk.synthesis.profit[id]
                 local allowFormulaIndex = {}
                 if (formulas ~= nil) then
                     for fi, f in ipairs(formulas) do
@@ -6156,7 +6156,7 @@ hevent_default_actions = {
         pickup = cj.Condition(function()
             local it = cj.GetManipulatedItem()
             local itId = cj.GetItemTypeId(it)
-            if (table.includes(itId, hslk_global.attr.item_attack_white.items)) then
+            if (table.includes(itId, hslk.attr.item_attack_white.items)) then
                 
                 return
             end
@@ -6184,7 +6184,7 @@ hevent_default_actions = {
         drop = cj.Condition(function()
             local it = cj.GetManipulatedItem()
             local itId = cj.GetItemTypeId(it)
-            if (table.includes(itId, hslk_global.attr.item_attack_white.items)) then
+            if (table.includes(itId, hslk.attr.item_attack_white.items)) then
                 
                 return
             end
@@ -6292,7 +6292,7 @@ hevent_default_actions = {
         end),
         use_s = cj.Condition(function()
             local skillId = string.id2char(cj.GetSpellAbilityId())
-            local itId = hslk_global.item_cooldown_ids[skillId] or nil
+            local itId = hslk.item_cooldown_ids[skillId] or nil
             if (itId == nil) then
                 return
             end
@@ -7412,7 +7412,7 @@ hunit.getSlk = function(whichUnit)
         default.AGIplus = nil
         default.INTplus = nil
     end
-    return hslk_global.id2Value.unit[hunit.getId(whichUnit)] or default
+    return hslk.id2Value.unit[hunit.getId(whichUnit)] or default
 end
 hunit.getAvatar = function(whichUnit)
     local slk = hunit.getSlk(whichUnit)
@@ -7621,7 +7621,7 @@ hunit.embed = function(u, options)
         end)
     end
     
-    local slk = hslk_global.id2Value.unit[id]
+    local slk = hslk.id2Value.unit[id]
     if (slk ~= nil) then
         if (slk.UNIT_TYPE == "courier_hero" or slk.UNIT_TYPE == "courier") then
             if (slk.COURIER_AUTO_SKILL == true) then
@@ -8132,7 +8132,7 @@ end
 hhero = {
     player_allow_qty = {}, 
     player_heroes = {}, 
-    build_token = hslk_global.unit_hero_tavern_token,
+    build_token = hslk.unit_hero_tavern_token,
     
     bornX = 0,
     bornY = 0,
@@ -8376,7 +8376,7 @@ hhero.buildSelector = function(options)
                 tavern = hunit.create(
                     {
                         whichPlayer = cj.Player(PLAYER_NEUTRAL_PASSIVE),
-                        unitId = options.tavernId or hslk_global.unit_hero_tavern,
+                        unitId = options.tavernId or hslk.unit_hero_tavern,
                         x = x,
                         y = y,
                     }
@@ -8489,14 +8489,14 @@ hcourier.embed = function(whichCourier)
     end)
 end
 hskill = {
-    SKILL_TOKEN = hslk_global.unit_token,
+    SKILL_TOKEN = hslk.unit_token,
     
-    SKILL_LEAP = hslk_global.unit_token_leap,
-    SKILL_BREAK = hslk_global.skill_break, 
-    SKILL_SWIM_UNLIMIT = hslk_global.skill_swim_unlimit,
-    SKILL_INVISIBLE = hslk_global.skill_invisible,
-    SKILL_AVOID_PLUS = hslk_global.attr.avoid.add,
-    SKILL_AVOID_MIUNS = hslk_global.attr.avoid.sub,
+    SKILL_LEAP = hslk.unit_token_leap,
+    SKILL_BREAK = hslk.skill_break,
+    SKILL_SWIM_UNLIMIT = hslk.skill_swim_unlimit,
+    SKILL_INVISIBLE = hslk.skill_invisible,
+    SKILL_AVOID_PLUS = hslk.attr.avoid.add,
+    SKILL_AVOID_MIUNS = hslk.attr.avoid.sub,
     BUFF_SWIM = string.char2id("BPSE"),
     BUFF_INVULNERABLE = string.char2id("Avul")
 }
@@ -8527,8 +8527,8 @@ hskill.getSlk = function(abilId)
     if (type(abilId) == "number") then
         abilityId = string.id2char(abilId)
     end
-    if (hslk_global.id2Value.ability[abilityId] ~= nil) then
-        slk = hslk_global.id2Value.ability[abilityId]
+    if (hslk.id2Value.ability[abilityId] ~= nil) then
+        slk = hslk.id2Value.ability[abilityId]
     end
     return slk
 end
@@ -11572,8 +11572,8 @@ hring.getSlk = function(id)
     if (type(id) == "number") then
         id = string.id2char(id)
     end
-    if (hslk_global.id2Value.ring[id] ~= nil) then
-        slk = hslk_global.id2Value.ring[id]
+    if (hslk.id2Value.ring[id] ~= nil) then
+        slk = hslk.id2Value.ring[id]
     end
     return slk
 end
@@ -11940,52 +11940,52 @@ hattribute.setThreeBuff = function(buff)
     end
 end
 hattribute.regAllAbility = function(whichUnit)
-    for _, v in ipairs(hslk_global.attr.ablis_gradient) do
+    for _, v in ipairs(hslk.attr.ablis_gradient) do
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.life.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.life.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.life.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.life.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.life.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.life.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.life.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.life.sub[v])
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.mana.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.mana.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.mana.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.mana.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.mana.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.mana.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.mana.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.mana.sub[v])
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.attack_green.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.attack_green.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.attack_green.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.attack_green.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.attack_green.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.attack_green.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.attack_green.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.attack_green.sub[v])
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.str_green.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.str_green.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.str_green.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.str_green.sub[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.agi_green.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.agi_green.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.agi_green.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.agi_green.sub[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.int_green.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.int_green.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.int_green.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.int_green.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.str_green.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.str_green.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.str_green.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.str_green.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.agi_green.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.agi_green.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.agi_green.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.agi_green.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.int_green.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.int_green.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.int_green.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.int_green.sub[v])
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.attack_speed.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.attack_speed.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.attack_speed.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.attack_speed.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.attack_speed.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.attack_speed.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.attack_speed.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.attack_speed.sub[v])
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.defend.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.defend.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.defend.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.defend.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.defend.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.defend.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.defend.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.defend.sub[v])
     end
-    for _, v in ipairs(hslk_global.attr.sight_gradient) do
+    for _, v in ipairs(hslk.attr.sight_gradient) do
         
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.sight.add[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.sight.add[v])
-        cj.UnitAddAbility(whichUnit, hslk_global.attr.sight.sub[v])
-        cj.UnitRemoveAbility(whichUnit, hslk_global.attr.sight.sub[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.sight.add[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.sight.add[v])
+        cj.UnitAddAbility(whichUnit, hslk.attr.sight.sub[v])
+        cj.UnitRemoveAbility(whichUnit, hslk.attr.sight.sub[v])
     end
 end
 hattribute.init = function(whichUnit)
@@ -12310,9 +12310,9 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                         level = math.floor(tempVal / max)
                         tempVal = math.floor(tempVal - level * max)
                         if (diff > 0) then
-                            hattribute.setLM(whichUnit, hslk_global.attr[attr].add[max], level)
+                            hattribute.setLM(whichUnit, hslk.attr[attr].add[max], level)
                         else
-                            hattribute.setLM(whichUnit, hslk_global.attr[attr].sub[max], level)
+                            hattribute.setLM(whichUnit, hslk.attr[attr].sub[max], level)
                         end
                         max = math.floor(max / 10)
                     end
@@ -12340,9 +12340,9 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                         level = math.floor(tempVal / max)
                         tempVal = math.floor(tempVal - level * max)
                         if (diff > 0) then
-                            hattribute.setAttackWhite(whichUnit, hslk_global.attr.item_attack_white.add[max], level)
+                            hattribute.setAttackWhite(whichUnit, hslk.attr.item_attack_white.add[max], level)
                         else
-                            hattribute.setAttackWhite(whichUnit, hslk_global.attr.item_attack_white.sub[max], level)
+                            hattribute.setAttackWhite(whichUnit, hslk.attr.item_attack_white.sub[max], level)
                         end
                         max = math.floor(max / 10)
                     end
@@ -12360,12 +12360,12 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                 cj.SetUnitAcquireRange(whichUnit, futureVal * 1.1)
             elseif (attr == "sight") then
                 
-                for _, gradient in ipairs(hslk_global.attr.sight_gradient) do
-                    cj.UnitRemoveAbility(whichUnit, hslk_global.attr.sight.add[gradient])
-                    cj.UnitRemoveAbility(whichUnit, hslk_global.attr.sight.sub[gradient])
+                for _, gradient in ipairs(hslk.attr.sight_gradient) do
+                    cj.UnitRemoveAbility(whichUnit, hslk.attr.sight.add[gradient])
+                    cj.UnitRemoveAbility(whichUnit, hslk.attr.sight.sub[gradient])
                 end
                 tempVal = math.floor(math.abs(futureVal))
-                local sight_gradient = table.clone(hslk_global.attr.sight_gradient)
+                local sight_gradient = table.clone(hslk.attr.sight_gradient)
                 if (tempVal ~= 0) then
                     while (true) do
                         local isFound = false
@@ -12374,9 +12374,9 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                                 tempVal = math.floor(tempVal - v)
                                 table.delete(v, sight_gradient)
                                 if (futureVal > 0) then
-                                    cj.UnitAddAbility(whichUnit, hslk_global.attr.sight.add[v])
+                                    cj.UnitAddAbility(whichUnit, hslk.attr.sight.add[v])
                                 else
-                                    cj.UnitAddAbility(whichUnit, hslk_global.attr.sight.sub[v])
+                                    cj.UnitAddAbility(whichUnit, hslk.attr.sight.sub[v])
                                 end
                                 isFound = true
                                 break
@@ -12394,12 +12394,12 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                 elseif (futureVal > 99999999) then
                     futureVal = 99999999
                 end
-                for _, grad in ipairs(hslk_global.attr.ablis_gradient) do
-                    local ab = hslk_global.attr[attr].add[grad]
+                for _, grad in ipairs(hslk.attr.ablis_gradient) do
+                    local ab = hslk.attr[attr].add[grad]
                     if (cj.GetUnitAbilityLevel(whichUnit, ab) > 1) then
                         cj.SetUnitAbilityLevel(whichUnit, ab, 1)
                     end
-                    ab = hslk_global.attr[attr].sub[grad]
+                    ab = hslk.attr[attr].sub[grad]
                     if (cj.GetUnitAbilityLevel(whichUnit, ab) > 1) then
                         cj.SetUnitAbilityLevel(whichUnit, ab, 1)
                     end
@@ -12411,15 +12411,15 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                         level = math.floor(tempVal / max)
                         tempVal = math.floor(tempVal - level * max)
                         if (futureVal > 0) then
-                            if (cj.GetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].add[max]) < 1) then
-                                cj.UnitAddAbility(whichUnit, hslk_global.attr[attr].add[max])
+                            if (cj.GetUnitAbilityLevel(whichUnit, hslk.attr[attr].add[max]) < 1) then
+                                cj.UnitAddAbility(whichUnit, hslk.attr[attr].add[max])
                             end
-                            cj.SetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].add[max], level + 1)
+                            cj.SetUnitAbilityLevel(whichUnit, hslk.attr[attr].add[max], level + 1)
                         else
-                            if (cj.GetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].sub[max]) < 1) then
-                                cj.UnitAddAbility(whichUnit, hslk_global.attr[attr].sub[max])
+                            if (cj.GetUnitAbilityLevel(whichUnit, hslk.attr[attr].sub[max]) < 1) then
+                                cj.UnitAddAbility(whichUnit, hslk.attr[attr].sub[max])
                             end
-                            cj.SetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].sub[max], level + 1)
+                            cj.SetUnitAbilityLevel(whichUnit, hslk.attr[attr].sub[max], level + 1)
                         end
                         max = math.floor(max / 10)
                     end
@@ -12431,12 +12431,12 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                 elseif (futureVal > 99999999) then
                     futureVal = 99999999
                 end
-                for _, grad in ipairs(hslk_global.attr.ablis_gradient) do
-                    local ab = hslk_global.attr[attr].add[grad]
+                for _, grad in ipairs(hslk.attr.ablis_gradient) do
+                    local ab = hslk.attr[attr].add[grad]
                     if (cj.GetUnitAbilityLevel(whichUnit, ab) > 1) then
                         cj.SetUnitAbilityLevel(whichUnit, ab, 1)
                     end
-                    ab = hslk_global.attr[attr].sub[grad]
+                    ab = hslk.attr[attr].sub[grad]
                     if (cj.GetUnitAbilityLevel(whichUnit, ab) > 1) then
                         cj.SetUnitAbilityLevel(whichUnit, ab, 1)
                     end
@@ -12448,15 +12448,15 @@ hattribute.setHandle = function(whichUnit, attr, opr, val, dur)
                         level = math.floor(tempVal / max)
                         tempVal = math.floor(tempVal - level * max)
                         if (futureVal > 0) then
-                            if (cj.GetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].add[max]) < 1) then
-                                cj.UnitAddAbility(whichUnit, hslk_global.attr[attr].add[max])
+                            if (cj.GetUnitAbilityLevel(whichUnit, hslk.attr[attr].add[max]) < 1) then
+                                cj.UnitAddAbility(whichUnit, hslk.attr[attr].add[max])
                             end
-                            cj.SetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].add[max], level + 1)
+                            cj.SetUnitAbilityLevel(whichUnit, hslk.attr[attr].add[max], level + 1)
                         else
-                            if (cj.GetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].sub[max]) < 1) then
-                                cj.UnitAddAbility(whichUnit, hslk_global.attr[attr].sub[max])
+                            if (cj.GetUnitAbilityLevel(whichUnit, hslk.attr[attr].sub[max]) < 1) then
+                                cj.UnitAddAbility(whichUnit, hslk.attr[attr].sub[max])
                             end
-                            cj.SetUnitAbilityLevel(whichUnit, hslk_global.attr[attr].sub[max], level + 1)
+                            cj.SetUnitAbilityLevel(whichUnit, hslk.attr[attr].sub[max], level + 1)
                         end
                         max = math.floor(max / 10)
                     end
@@ -12726,25 +12726,25 @@ hitem = {
         UNIT = "unit" 
     },
     FLEETING_IDS = {
-        GOLD = hslk_global.item_fleeting[1], 
-        LUMBER = hslk_global.item_fleeting[2], 
-        BOOK_YELLOW = hslk_global.item_fleeting[3], 
-        BOOK_GREEN = hslk_global.item_fleeting[4],
-        BOOK_PURPLE = hslk_global.item_fleeting[5],
-        BOOK_BLUE = hslk_global.item_fleeting[6],
-        BOOK_RED = hslk_global.item_fleeting[7],
-        RUNE = hslk_global.item_fleeting[8], 
-        RELIEF = hslk_global.item_fleeting[9], 
-        EGG = hslk_global.item_fleeting[10], 
-        FRAGMENT = hslk_global.item_fleeting[11], 
-        QUESTION = hslk_global.item_fleeting[12], 
-        GRASS = hslk_global.item_fleeting[13], 
-        DOTA2_GOLD = hslk_global.item_fleeting[14], 
-        DOTA2_DAMAGE = hslk_global.item_fleeting[15], 
-        DOTA2_CURE = hslk_global.item_fleeting[16], 
-        DOTA2_SPEED = hslk_global.item_fleeting[17], 
-        DOTA2_VISION = hslk_global.item_fleeting[18], 
-        DOTA2_INVISIBLE = hslk_global.item_fleeting[19], 
+        GOLD = hslk.item_fleeting[1],
+        LUMBER = hslk.item_fleeting[2],
+        BOOK_YELLOW = hslk.item_fleeting[3],
+        BOOK_GREEN = hslk.item_fleeting[4],
+        BOOK_PURPLE = hslk.item_fleeting[5],
+        BOOK_BLUE = hslk.item_fleeting[6],
+        BOOK_RED = hslk.item_fleeting[7],
+        RUNE = hslk.item_fleeting[8],
+        RELIEF = hslk.item_fleeting[9],
+        EGG = hslk.item_fleeting[10],
+        FRAGMENT = hslk.item_fleeting[11],
+        QUESTION = hslk.item_fleeting[12],
+        GRASS = hslk.item_fleeting[13],
+        DOTA2_GOLD = hslk.item_fleeting[14],
+        DOTA2_DAMAGE = hslk.item_fleeting[15],
+        DOTA2_CURE = hslk.item_fleeting[16],
+        DOTA2_SPEED = hslk.item_fleeting[17],
+        DOTA2_VISION = hslk.item_fleeting[18],
+        DOTA2_INVISIBLE = hslk.item_fleeting[19],
     },
 }
 hitem.embed = function(u)
@@ -12898,8 +12898,8 @@ hitem.getSlk = function(itOrId)
     else
         itId = hitem.getId(itOrId)
     end
-    if (hslk_global.id2Value.item[itId] ~= nil) then
-        slk = hslk_global.id2Value.item[itId]
+    if (hslk.id2Value.item[itId] ~= nil) then
+        slk = hslk.id2Value.item[itId]
     end
     return slk
 end
@@ -13118,14 +13118,14 @@ hitem.synthesis = function(whichUnit, items)
     while (matchCount > 0) do
         matchCount = 0
         for _, itId in ipairs(itemKinds) do
-            if (hslk_global.synthesis.fragment[itId] ~= nil) then
-                for need = #hslk_global.synthesis.fragment[itId], 1, -1 do
+            if (hslk.synthesis.fragment[itId] ~= nil) then
+                for need = #hslk.synthesis.fragment[itId], 1, -1 do
                     if ((itemQuantity[itId] or 0) >= need) then
-                        local maybeProfits = hslk_global.synthesis.fragment[itId][need]
+                        local maybeProfits = hslk.synthesis.fragment[itId][need]
                         for _, mp in ipairs(maybeProfits) do
                             local profitId = mp.profit
                             local profitIndex = mp.index
-                            local whichProfit = hslk_global.synthesis.profit[profitId][profitIndex]
+                            local whichProfit = hslk.synthesis.profit[profitId][profitIndex]
                             local needFragments = whichProfit.fragment
                             local match = true
                             for _, frag in ipairs(needFragments) do
@@ -13161,7 +13161,7 @@ hitem.synthesis = function(whichUnit, items)
     
     local final = {}
     for _, itId in ipairs(itemKinds) do
-        local slk = hslk_global.id2Value.item[itId]
+        local slk = hslk.id2Value.item[itId]
         if (slk ~= nil) then
             local overlie = slk.OVERLIE or 1
             while (itemQuantity[itId] > 0) do
@@ -13270,14 +13270,14 @@ hitem.separate = function(whichItem, separateType, formulaIndex, whichUnit)
             hitem.create({ itemId = id, charges = 1, x = x, y = y, during = 0 })
         end
     elseif (separateType == "formula") then
-        local originSlk = hslk_global.id2Value.item[id]
+        local originSlk = hslk.id2Value.item[id]
         if (originSlk ~= nil and originSlk.SHADOW == true) then
-            id = hslk_global.id2Value.item[originSlk.SHADOW_ID].ITEM_ID
+            id = hslk.id2Value.item[originSlk.SHADOW_ID].ITEM_ID
         end
-        if (hslk_global.synthesis.profit[id] == nil) then
+        if (hslk.synthesis.profit[id] == nil) then
             return "物品不存在公式，无法拆分"
         end
-        local profit = hslk_global.synthesis.profit[id][formulaIndex] or nil
+        local profit = hslk.synthesis.profit[id][formulaIndex] or nil
         if (profit == nil) then
             return "物品找不到公式，无法拆分"
         end
@@ -13291,7 +13291,7 @@ hitem.separate = function(whichItem, separateType, formulaIndex, whichUnit)
                     end
                 else
                     local qty = frag[2]
-                    local slk = hslk_global.id2Value.item[flagId]
+                    local slk = hslk.id2Value.item[flagId]
                     if (slk ~= nil) then
                         local overlie = slk.OVERLIE or 1
                         while (qty > 0) do
@@ -13459,7 +13459,7 @@ hitem.detector = function(whichUnit, originItem)
     end
     if (#extra > 0) then
         for _, e in ipairs(extra) do
-            local slk = hslk_global.id2Value.item[e.id]
+            local slk = hslk.id2Value.item[e.id]
             local id = slk.ITEM_ID
             if (slk.SHADOW ~= true and slk.SHADOW_ID ~= nil) then
                 id = slk.SHADOW_ID
@@ -14008,7 +14008,7 @@ end
 httg = htextTag
 hattr = hattribute
 cj.TimerStart(cj.CreateTimer(), 1.00, true, htime.clock)
-local preread_u = cj.CreateUnit(hplayer.player_passive, hslk_global.unit_token, 0, 0, 0)
+local preread_u = cj.CreateUnit(hplayer.player_passive, hslk.unit_token, 0, 0, 0)
 hattr.regAllAbility(preread_u)
 hunit.del(preread_u)
 hevent.pool('global', hevent_default_actions.player.apm, function(tgr)
@@ -14140,8 +14140,8 @@ cj.TriggerAddAction(startTrigger, function()
     cj.DisableTrigger(startTrigger)
     cj.DestroyTrigger(startTrigger)
     
-    local uidMe = hslk_global.name2Value.unit["剑士"].UNIT_ID
-    local uidEnemy = hslk_global.name2Value.unit["骑士"].UNIT_ID
+    local uidMe = hslk.name2Value.unit["剑士"].UNIT_ID
+    local uidEnemy = hslk.name2Value.unit["骑士"].UNIT_ID
     
     local me = hunit.create({
         whichPlayer = hplayer.players[1],

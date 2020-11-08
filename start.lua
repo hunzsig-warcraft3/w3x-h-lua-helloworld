@@ -1,14 +1,14 @@
 --- 延时游戏时间0.1秒，确保已进入游戏
 local startTrigger = cj.CreateTrigger()
+
 cj.TriggerRegisterTimerEvent(startTrigger, 0.1, false)
 cj.TriggerAddAction(startTrigger, function()
     cj.DisableTrigger(startTrigger)
     cj.DestroyTrigger(startTrigger)
 
     -- 这些ID只要正确使用了slkHelper，就会自动获得，极其爽
-    local uidMe = hslk_global.name2Value.unit["剑士"].UNIT_ID
-    local uidEnemy = hslk_global.name2Value.unit["骑士"].UNIT_ID
-
+    local uidMe = hslk.name2Value.unit["剑士"]._id
+    local uidEnemy = hslk.name2Value.unit["骑士"]._id
     -- 创造一个我的剑士打倒敌人骑兵
     local me = hunit.create({
         whichPlayer = hplayer.players[1],

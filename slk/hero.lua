@@ -27,7 +27,6 @@ local heros = {
         AGIplus = 2.3,
         INTplus = 2.1,
         goldcost = 0,
-        CUSTOM_DATA = {},
     },
     {
         Name = "骑士",
@@ -57,7 +56,6 @@ local heros = {
         AGIplus = 1.7,
         INTplus = 2.0,
         goldcost = 0,
-        CUSTOM_DATA = {},
     },
 }
 
