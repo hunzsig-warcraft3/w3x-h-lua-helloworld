@@ -26,7 +26,7 @@ cj.TriggerAddAction(startTrigger, function()
     hattr.set(me, 0, {
         xtras = {
             add = {
-                { on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack_white", odds = 100, percent = { 0, 100 }, effect = nil },
+                { on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack", odds = 100, percent = { 100, 300 }, effect = nil },
             }
         },
     })
@@ -49,7 +49,9 @@ cj.TriggerAddAction(startTrigger, function()
     hevent.onDamage(enemy, function(evtData)
         haward.forUnitExp(evtData.triggerUnit, evtData.damage)
     end)
-    hevent.onBeAttack(me, function(evtData)
-        print_mb(hunit.getName(evtData.triggerUnit), hunit.getName(evtData.attacker))
+    hevent.onKnocking(me, function(evtData)
+        print_mb(hunit.getName(evtData.triggerUnit)
+            .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
+            .. "暴击" .. evtData.damage .. "血")
     end)
 end)
