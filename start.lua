@@ -26,7 +26,10 @@ cj.TriggerAddAction(startTrigger, function()
     hattr.set(me, 0, {
         xtras = {
             add = {
-                { on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack", odds = 100, percent = { 100, 300 }, effect = nil },
+                {
+                    on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
+                    odds = 100, percent = { 50, 1000 }, effect = nil
+                },
             }
         },
     })
@@ -38,7 +41,7 @@ cj.TriggerAddAction(startTrigger, function()
         attr = {
             attack_white = "+150",
             life = "+5000000",
-            life_back = "+100000",
+            life_back = "+5000",
             damage_reduction = "+50",
         }
     })
