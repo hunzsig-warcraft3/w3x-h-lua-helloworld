@@ -1,6 +1,6 @@
 ?>
 
-library mySlk initializer Init
+library myMap initializer Init
 
     private function Init takes nothing returns nothing
 
@@ -21,7 +21,12 @@ library mySlk initializer Init
             -- 设定完毕后请求生效，不执行helper设置的内容不会生效(slkHelper)
             slkHelper.enable()
         ?>
+        // 执行F4内定义的lua文件（就是最下面那个import的main.lua）
+        call Cheat( "exec-lua:\"main\"" )
     endfunction
 
 endlibrary
 <?
+-- 插入lua代码
+-- 上线改为import("main.lua") ("dist.lua", true)
+import("main.lua") ("hot.lua", true)

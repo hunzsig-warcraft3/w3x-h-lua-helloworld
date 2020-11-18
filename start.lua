@@ -6,52 +6,40 @@ cj.TriggerAddAction(startTrigger, function()
     cj.DisableTrigger(startTrigger)
     cj.DestroyTrigger(startTrigger)
 
-    -- 这些ID只要正确使用了slkHelper，就会自动获得，极其爽
-    local uidMe = hslk.name2Value.unit["剑士"]._id
-    local uidEnemy = hslk.name2Value.unit["骑士"]._id
+    -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
+    local uidMe = hunit.n2i("剑士")
+    local uidEnemy = hunit.n2i("骑士")
     -- 创造一个我的剑士打倒敌人骑兵
     local me = hunit.create({
         whichPlayer = hplayer.players[1],
         unitId = uidMe,
         x = 0,
         y = 0,
-    })
-    hattr.set(me, 3, {
-        attack_effect = {
-            add = {
-                { attr = "knocking", odds = 100, percent = 100, effect = nil },
-            }
+        attr = {
+            attack_damage_type = "+fire",
+            attack_speed = "+500",
+            life = "+2000",
+            life_back = "+100",
+            attack_white = "+100",
         }
     })
     hattr.set(me, 0, {
-        attack_damage_type = "+fire",
-        attack_speed = "+500",
-        life = "+2000",
-        life_back = "+100",
-        attack_white = "+100",
-        attack_effect = {
+        xtras = {
             add = {
-                { attr = "knocking", odds = 30, percent = 30, effect = nil },
-                { attr = "crack_fly", odds = 20, val = 20, during = 0.6, effect = nil, distance = 100, high = 500 }
+                { on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack_white", odds = 100, percent = { 0, 100 }, effect = nil },
             }
-        }
+        },
     })
     local enemy = henemy.create({
         whichPlayer = hplayer.players[1],
         unitId = uidEnemy,
         x = 0,
         y = 0,
-    })
-    hattr.set(enemy, 0, {
-        attack_white = "+150",
-        life = "+5000000",
-        life_back = "+100000",
-        toughness = "+50",
-        attack_effect = {
-            add = {
-                { attr = "swim", odds = 10, val = 10, during = 2, effect = nil },
-                { attr = "lightning_chain", odds = 75, val = 30, effect = nil, qty = 1, reduce = 0.0 },
-            }
+        attr = {
+            attack_white = "+150",
+            life = "+5000000",
+            life_back = "+100000",
+            damage_reduction = "+50",
         }
     })
     -- 伤害变成经验
