@@ -9,6 +9,7 @@ cj.TriggerAddAction(startTrigger, function()
     -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
     local uidMe = hunit.n2i("剑士")
     local uidEnemy = hunit.n2i("骑士")
+    print_mbr(hunit.getHSlk(uidMe))
     -- 创造一个我的剑士打倒敌人骑兵
     local me = hunit.create({
         whichPlayer = hplayer.players[1],
@@ -17,18 +18,22 @@ cj.TriggerAddAction(startTrigger, function()
         y = 0,
         attr = {
             attack_damage_type = "+fire",
-            attack_speed = "+500",
+            attack_speed = "+50",
             life = "+2000",
             life_back = "+100",
             attack_white = "+100",
+            -- 单位自身的暴击（自身的暴击可降低回避效果，伤害是在原伤害上加成，不独立计算）
+            knocking_odds = "+50",
+            knocking_percent = "+100",
         }
     })
     hattr.set(me, 0, {
         xtras = {
             add = {
+                -- 额外特效的暴击（回避可使此暴击无效，伤害独立）
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
-                    odds = 100, percent = { 50, 1000 }, effect = nil
+                    odds = 10, percent = { 300, 2000 }, effect = nil
                 },
             }
         },

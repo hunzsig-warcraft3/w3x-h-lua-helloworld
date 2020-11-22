@@ -27,6 +27,9 @@ local heros = {
         AGIplus = 2.3,
         INTplus = 2.1,
         goldcost = 0,
+        _hslk = {
+            msg = "自定义数据"
+        },
     },
     {
         Name = "骑士",
