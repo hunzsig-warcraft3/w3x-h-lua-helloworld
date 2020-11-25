@@ -16,8 +16,10 @@ library myMap initializer Init
             #include "../h-lua/foundation/table.lua"
             #include "../h-lua/foundation/string.lua"
             #include "../h-lua/foundation/color.lua"
-            -- 这是在slkHelper帮助下自己写的英雄构建
-            #include "./slk/hero.lua"
+            -- 这是在slkHelper帮助下自己写的单位构建
+            #include "./slk/unit.lua"
+            -- 这是在slkHelper帮助下自己写的物品构建
+            #include "./slk/item.lua"
             -- 设定完毕后请求生效，不执行helper设置的内容不会生效(slkHelper)
             slkHelper.enable()
         ?>
