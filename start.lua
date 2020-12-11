@@ -17,7 +17,7 @@ cj.TriggerAddAction(startTrigger, function()
         x = 0,
         y = 0,
         attr = {
-            attack_damage_type = "+fire",
+            attack_enchant = "+fire",
             attack_speed = "+50",
             life = "+2000",
             life_back = "+100",
@@ -25,6 +25,7 @@ cj.TriggerAddAction(startTrigger, function()
             -- 单位自身的暴击（自身的暴击可降低回避效果，伤害是在原伤害上加成，不独立计算）
             knocking_odds = "+20",
             knocking_extent = "+100",
+            e_fire = "+20",
         }
     })
     hattr.set(me, 0, {
