@@ -9,7 +9,6 @@ cj.TriggerAddAction(startTrigger, function()
     -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
     local uidMe = hunit.n2i("剑士")
     local uidEnemy = hunit.n2i("骑士")
-    print_mbr(hunit.getHSlk(uidMe))
     -- 创造一个我的剑士打倒敌人骑兵
     local me = hunit.create({
         whichPlayer = hplayer.players[1],
