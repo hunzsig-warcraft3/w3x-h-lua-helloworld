@@ -35,6 +35,7 @@ local items = {
             target = "air,ground,friend,self,vuln,invu",
             attr = {
                 life = "+50",
+                agi_green = "+33",
             }
         },
     },

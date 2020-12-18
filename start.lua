@@ -6,6 +6,17 @@ cj.TriggerAddAction(startTrigger, function()
     cj.DisableTrigger(startTrigger)
     cj.DestroyTrigger(startTrigger)
 
+    -- 配置一个双火爆破附魔环境
+    henchant.setAppend(true) -- 启用附魔附着
+    henchant.setAppendAttachEffect(
+        'fire',
+        { 'left hand', 'right hand', 'head', 'origin' },
+        { 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' }
+    )
+    henchant.setEnvResponse('fire', 'fire', function(evtData)
+
+    end)
+
     -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
     local uidMe = hunit.n2i("剑士")
     local uidEnemy = hunit.n2i("骑士")
