@@ -57,22 +57,18 @@ end
 
 -- 配置一个双火爆破附魔环境
 henchant.enableAppend(true) -- 先启用附魔附着
-henchant.setAppendAttachEffect(
-    'fire',
-    {
-        { attach = 'origin', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
-        { attach = 'left hand', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
-        { attach = 'right hand', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
-        { attach = 'head', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
-    },
-    { 0, 0, 0 }
-)
+henchant.setAppendAttachEffect('fire', {
+    { attach = 'origin', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
+    { attach = 'left hand', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
+    { attach = 'right hand', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
+    { attach = 'head', effect = 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' },
+})
 henchant.setEnvReaction('fire', 'fire', function(evtData)
     if (evtData.type[1] == 'fire' and evtData.type[2] == 'fire') then
         htextTag.style(htextTag.create2Unit(
             evtData.targetUnit,
             "火火反应爆炸X" .. evtData.level, 10, "dc143c", 1, 1.70, 60.00
         ), "scale", 0, 0.20)
-        hunit.setRGB(evtData.targetUnit, 255, 0, 0, 0.5, 0.3)
+        hunit.setRGB(evtData.targetUnit, 255, 0, 0, 1, 0.3)
     end
 end)
