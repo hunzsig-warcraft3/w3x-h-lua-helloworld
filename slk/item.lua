@@ -1,5 +1,5 @@
 slkHelper.item.synthesis({
-    "双铁剑=铁剑x3+铁盾x3"
+    "双铁剑=铁剑x3+铁盾x3", -- 等于 { { "双铁剑", 1 }, { "铁剑", 3 }, { "铁盾", 3 } }
 })
 
 local items = {
@@ -54,6 +54,7 @@ local items = {
         _overlie = 2,
         _attr = {
             defend = "+1",
+            e_physical_append = '-1',
         },
     },
     {
@@ -70,6 +71,7 @@ local items = {
         _weight = 4,
         _overlie = 1,
         _attr = {
+            e_physical_attack = '+1',
             attack_green = "+50",
             defend = "+2",
             xtras = {

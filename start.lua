@@ -6,17 +6,6 @@ cj.TriggerAddAction(startTrigger, function()
     cj.DisableTrigger(startTrigger)
     cj.DestroyTrigger(startTrigger)
 
-    -- 配置一个双火爆破附魔环境
-    henchant.setAppend(true) -- 启用附魔附着
-    henchant.setAppendAttachEffect(
-        'fire',
-        { 'left hand', 'right hand', 'head', 'origin' },
-        { 'Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl' }
-    )
-    henchant.setEnvResponse('fire', 'fire', function(evtData)
-
-    end)
-
     -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
     local uidMe = hunit.n2i("剑士")
     local uidEnemy = hunit.n2i("骑士")
@@ -27,7 +16,7 @@ cj.TriggerAddAction(startTrigger, function()
         x = 0,
         y = 0,
         attr = {
-            attack_enchant = "+fire", -- 附魔火
+            e_fire_attack = "+1", -- 附魔1层火
             attack_speed = "+50",
             life = "+2000",
             life_back = "+100",
@@ -38,6 +27,7 @@ cj.TriggerAddAction(startTrigger, function()
             knocking_extent = "+100",
         }
     })
+    onExp(me)
     hattr.set(me, 0, {
         xtras = {
             add = {
@@ -49,6 +39,11 @@ cj.TriggerAddAction(startTrigger, function()
                 -- 越暴击，火伤害越高！
                 {
                     on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire", val = 10, during = 5,
+                    odds = 100, percent = 100 --[[默认100]], effect = nil
+                },
+                -- 越暴击，火附魔占比越高！
+                {
+                    on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire_attack", val = 1, during = 5,
                     odds = 100, percent = 100 --[[默认100]], effect = nil
                 },
             }
@@ -70,12 +65,12 @@ cj.TriggerAddAction(startTrigger, function()
     hevent.onDamage(me, function(evtData)
         haward.forUnitExp(evtData.triggerUnit, evtData.damage)
     end)
-    hevent.onDamage(enemy, function(evtData)
-        haward.forUnitExp(evtData.triggerUnit, evtData.damage)
-    end)
-    hevent.onKnocking(me, function(evtData)
-        print_mb(hunit.getName(evtData.triggerUnit)
-            .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
-            .. "暴击" .. evtData.damage .. "血")
-    end)
+    --hevent.onDamage(enemy, function(evtData)
+    --    haward.forUnitExp(evtData.triggerUnit, evtData.damage)
+    --end)
+    --hevent.onKnocking(me, function(evtData)
+    --    print_mb(hunit.getName(evtData.triggerUnit)
+    --        .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
+    --        .. "暴击" .. evtData.damage .. "血")
+    --end)
 end)
