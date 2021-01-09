@@ -76,12 +76,12 @@ local items = {
             defend = "+2",
             xtras = {
                 {
-                    on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
-                    odds = 10, percent = { 300, 2000 }, effect = nil
+                    on = CONST_EVENT.attack, action = "triggerUnit.attr.attack_green", val = "-triggerUnit.move",
+                    odds = 100, percent = 33.3, during = 3, effect = nil
                 },
                 {
-                    on = CONST_EVENT.attack, action = "targetUnit.spec.split", val = "triggerUnit.attack",
-                    odds = 10, radius = 50, percent = 20, effect = nil
+                    on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
+                    odds = 10, percent = { 300, 2000 }, effect = nil
                 },
             },
         },
