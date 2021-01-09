@@ -55,6 +55,23 @@ henchant.setEnvReaction('fire', 'fire', function(evtData)
             "火火反应爆炸X" .. evtData.level, 10, "dc143c", 1, 1.70, 60.00
         ), "scale", 0, 0.20)
         hunit.setRGB(evtData.targetUnit, 255, 0, 0, 1, 0.3)
+        if (math.random(1, 10) == 5) then
+            hskill.damageRange({
+                radius = 100,
+                frequency = 0.25,
+                times = 3,
+                effectSingle = "Abilities\\Spells\\Other\\Monsoon\\MonsoonBoltTarget.mdl",
+                filter = function(filterUnit)
+                    return his.enemy(evtData.sourceUnit, filterUnit) and his.alive(filterUnit)
+                end,
+                x = hunit.x(evtData.targetUnit),
+                y = hunit.y(evtData.targetUnit),
+                damage = 666,
+                sourceUnit = evtData.sourceUnit,
+                damageSrc = CONST_DAMAGE_SRC.skill,
+                damageType = { CONST_DAMAGE_TYPE.thunder }
+            })
+        end
     end
 end)
 

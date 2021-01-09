@@ -23,7 +23,7 @@ cj.TriggerAddAction(startTrigger, function()
             attack_white = "+100",
             weight = "+100",
             -- 单位自身的暴击（自身的暴击可降低回避效果，伤害是在原伤害上加成，不独立计算）
-            knocking_odds = "+20",
+            knocking_odds = "+10",
             knocking_extent = "+100",
         }
     })
@@ -34,17 +34,17 @@ cj.TriggerAddAction(startTrigger, function()
                 -- 额外特效的暴击（回避可使此暴击无效，伤害独立）
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
-                    odds = 20, percent = { 300, 1000 }, effect = nil
+                    odds = 20, percent = { 100, 500 }, effect = nil
                 },
                 -- 越暴击，火伤害越高！
                 {
                     on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire", val = 10, during = 5,
-                    odds = 100, percent = 100 --[[默认100]], effect = nil
+                    odds = 75, percent = 100 --[[默认100]], effect = nil
                 },
                 -- 越暴击，火附魔占比越高！
                 {
                     on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire_attack", val = 1, during = 5,
-                    odds = 100, percent = 100 --[[默认100]], effect = nil
+                    odds = 75, percent = 100 --[[默认100]], effect = nil
                 },
             }
         },
