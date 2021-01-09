@@ -43,17 +43,18 @@ cj.TriggerAddAction(startTrigger, function()
                 },
                 -- 越暴击，火附魔占比越高！
                 {
-                    on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire_attack", val = 1, during = 5,
-                    odds = 75, percent = 100 --[[默认100]], effect = nil
+                    on = CONST_EVENT.attack, action = "targetUnit.spec.split", val = 'triggerUnit.attack',
+                    radius = 500, odds = 100, percent = 10, effect = nil
                 },
             }
         },
     })
-    local enemy = henemy.create({
+    henemy.create({
         whichPlayer = hplayer.players[1],
         unitId = uidEnemy,
         x = 0,
         y = 0,
+        qty = 2,
         attr = {
             attack_white = "+150",
             life = "+5000000",
@@ -65,12 +66,9 @@ cj.TriggerAddAction(startTrigger, function()
     hevent.onDamage(me, function(evtData)
         haward.forUnitExp(evtData.triggerUnit, evtData.damage)
     end)
-    --hevent.onDamage(enemy, function(evtData)
-    --    haward.forUnitExp(evtData.triggerUnit, evtData.damage)
-    --end)
-    --hevent.onKnocking(me, function(evtData)
-    --    print_mb(hunit.getName(evtData.triggerUnit)
-    --        .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
-    --        .. "暴击" .. evtData.damage .. "血")
-    --end)
+    hevent.onKnocking(me, function(evtData)
+        print_mb(hunit.getName(evtData.triggerUnit)
+            .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
+            .. "暴击" .. evtData.damage .. "血")
+    end)
 end)
