@@ -79,6 +79,10 @@ local items = {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
                     odds = 10, percent = { 300, 2000 }, effect = nil
                 },
+                {
+                    on = CONST_EVENT.attack, action = "targetUnit.spec.split", val = "triggerUnit.attack",
+                    odds = 10, percent = 20, effect = nil
+                },
             },
         },
     }
