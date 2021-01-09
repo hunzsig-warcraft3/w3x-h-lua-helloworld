@@ -41,7 +41,7 @@ cj.TriggerAddAction(startTrigger, function()
                     on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire", val = 10, during = 5,
                     odds = 75, percent = 100 --[[默认100]], effect = nil
                 },
-                -- 越暴击，火附魔占比越高！
+                -- 攻击分裂！
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.split", val = 'triggerUnit.attack',
                     radius = 500, odds = 100, percent = 10, effect = nil
