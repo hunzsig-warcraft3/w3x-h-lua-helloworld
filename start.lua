@@ -57,7 +57,7 @@ cj.TriggerAddAction(startTrigger, function()
         qty = 2,
         attr = {
             attack_white = "+100",
-            life = "+500",
+            life = "+10000",
             life_back = "+1000",
             damage_reduction = "+50",
         }

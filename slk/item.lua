@@ -55,6 +55,9 @@ local items = {
         _attr = {
             defend = "+1",
             e_physical_append = '-1',
+            str_green = "+1",
+            agi_green = "+1",
+            int_green = "+1",
         },
     },
     {
