@@ -18,7 +18,7 @@ cj.TriggerAddAction(startTrigger, function()
         attr = {
             e_fire_attack = "+1", -- 附魔1层火
             attack_speed = "+50",
-            life = "+2000",
+            life = "+5000",
             life_back = "+100",
             attack_white = "+100",
             weight = "+100",
@@ -41,9 +41,9 @@ cj.TriggerAddAction(startTrigger, function()
                     on = CONST_EVENT.knocking, action = "triggerUnit.attr.e_fire", val = 10, during = 5,
                     odds = 75, percent = 100 --[[默认100]], effect = nil
                 },
-                -- 攻击分裂！
+                -- 攻击分裂10%！
                 {
-                    on = CONST_EVENT.attack, action = "targetUnit.spec.split", val = 'triggerUnit.attack',
+                    on = CONST_EVENT.attack, action = "targetUnit.spec.split", val = 'damage',
                     radius = 500, odds = 100, percent = 10, effect = nil
                 },
             }
@@ -56,9 +56,9 @@ cj.TriggerAddAction(startTrigger, function()
         y = 0,
         qty = 2,
         attr = {
-            attack_white = "+150",
-            life = "+5000000",
-            life_back = "+5000",
+            attack_white = "+100",
+            life = "+500",
+            life_back = "+1000",
             damage_reduction = "+50",
         }
     })
