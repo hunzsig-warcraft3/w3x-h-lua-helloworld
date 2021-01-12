@@ -3,10 +3,7 @@ hplayer.qty_max = 1 -- 最大玩家数
 hplayer.convert_ratio = 1000000 -- 换算比率，100金 -> 1木
 
 -- 设定敌军
-henemy.setName("怪物")
--- henemy.setShareSight(true)
-henemy.setColor(cj.ConvertPlayerColor(12)) -- black
-henemy.setPlayer(hplayer.players[2])
+henemy.set("怪物", nil, { 2 }, false)
 
 -- 调试去除迷雾
 if (HLUA_DEBUG == true) then
@@ -54,7 +51,7 @@ henchant.setEnvReaction('fire', 'fire', function(evtData)
             evtData.targetUnit,
             "火火反应爆炸X" .. evtData.level, 10, "dc143c", 1, 1.70, 60.00
         ), "scale", 0, 0.20)
-        hunit.setRGB(evtData.targetUnit, 255, 0, 0, 1, 0.3)
+        hunit.setRGBA(evtData.targetUnit, math.random(55, 255), 0, 0, nil, 0.5)
         if (math.random(1, 10) == 5) then
             hskill.damageRange({
                 radius = 100,
