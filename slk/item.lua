@@ -79,12 +79,15 @@ local items = {
             defend = "+2",
             xtras = {
                 {
-                    on = CONST_EVENT.attack, action = "triggerUnit.attr.attack_green", val = "-triggerUnit.move",
-                    odds = 100, percent = 33.3, during = 3, effect = nil
-                },
-                {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
                     odds = 10, percent = { 300, 2000 }, effect = nil
+                },
+                {
+                    alias = "石像鬼毒光砍",
+                    on = CONST_EVENT.attack, action = "targetUnit.spec.paw", val = 'damage',
+                    radius = 50, odds = 50, speed = 12, deg = 30, distance = 500, qty = 3,
+                    effect = 'Abilities\\Weapons\\GargoyleMissile\\GargoyleMissile.mdl',
+                    damageType = { CONST_DAMAGE_TYPE.poison }
                 },
             },
         },
