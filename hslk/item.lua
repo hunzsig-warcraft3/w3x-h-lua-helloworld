@@ -83,11 +83,12 @@ local items = {
                     odds = 10, percent = { 300, 2000 }, effect = nil
                 },
                 {
-                    alias = "石像鬼毒光砍",
+                    alias = "水蛇湍乱",
                     on = CONST_EVENT.attack, action = "targetUnit.spec.paw", val = 'damage',
-                    radius = 50, odds = 50, speed = 12, deg = 30, distance = 500, qty = 3,
-                    effect = 'Abilities\\Weapons\\GargoyleMissile\\GargoyleMissile.mdl',
-                    damageType = { CONST_DAMAGE_TYPE.poison }
+                    height = 70, tokenArrowHeight = 30, shake = 'random',
+                    radius = 50, odds = 50, speed = 5, deg = 45, distance = 600, qty = 3,
+                    effect = 'Abilities\\Weapons\\WaterElementalMissile\\WaterElementalMissile.mdl',
+                    damageType = { CONST_DAMAGE_TYPE.water }
                 },
             },
         },
