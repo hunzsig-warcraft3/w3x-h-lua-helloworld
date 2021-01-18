@@ -70,6 +70,11 @@ local items = {
         pawnable = 1,
         droppable = 1,
         Hotkey = "E",
+        cooldown = 2,
+        cooldownTarget = CONST_ABILITY_TARGET.location.value,
+        Rng1 = 1000,
+        uses = 3,
+        _active = "跳跳跳",
         _desc = "双倍的铁，双倍的快乐",
         _weight = 4,
         _overlie = 1,
@@ -92,7 +97,7 @@ local items = {
                 },
             },
         },
-    }
+    },
 }
 
 for _, v in pairs(items) do

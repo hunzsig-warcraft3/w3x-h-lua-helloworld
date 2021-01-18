@@ -5,12 +5,8 @@ hplayer.convert_ratio = 1000000 -- 换算比率，100金 -> 1木
 -- 设定敌军
 henemy.set("怪物", nil, { 2 }, false)
 
--- 调试去除迷雾
-if (HLUA_DEBUG == true) then
-    henv.setFogStatus(false, false)
-else
-    henv.setFogStatus(true, true)
-end
+-- 调试自动去除迷雾
+henv.setFogStatus(isDebugging() == false, isDebugging() == false)
 
 --- 设定获得黄金木头特效
 hevent.onPlayerResourceChange(function(evtData)
@@ -70,3 +66,11 @@ henchant.setEnvReaction('fire', 'water', function(evtData)
     end
 end)
 
+hmatcher.item({
+    {
+        "双铁剑",
+        function(evtData)
+            hunit.portal(evtData.triggerUnit, evtData.targetX, evtData.targetY)
+        end
+    }
+})
