@@ -64,7 +64,7 @@ cj.TriggerAddAction(startTrigger, function()
     })
     -- 伤害变成经验
     hevent.onDamage(me, function(evtData)
-        haward.forUnitExp(evtData.triggerUnit, evtData.damage)
+        haward.forUnitExp(evtData.triggerUnit, evtData.damage / 30)
     end)
     hevent.onKnocking(me, function(evtData)
         print_mb(hunit.getName(evtData.triggerUnit)

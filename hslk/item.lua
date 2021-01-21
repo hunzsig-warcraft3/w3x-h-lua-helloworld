@@ -51,7 +51,7 @@ local items = {
         Hotkey = "W",
         _desc = "普通的铁盾",
         _weight = 3.1,
-        _overlie = 2,
+        _overlie = 1,
         _attr = {
             defend = "+1",
             e_physical_append = '-1',
@@ -102,5 +102,6 @@ local items = {
 
 for _, v in pairs(items) do
     v.race = "human"
+    v._shadow = true
     slkHelper.item.normal(v)
 end
