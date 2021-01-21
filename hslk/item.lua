@@ -36,6 +36,7 @@ local items = {
             attr = {
                 life = "+50",
                 agi_green = "+33",
+                attack_range = "+300",
             }
         },
     },
