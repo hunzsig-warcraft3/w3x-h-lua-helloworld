@@ -19,7 +19,7 @@ local items = {
         _active = "主动演示（效果需要自己处理，本图无效果）",
         _passive = "被动演示（效果需要自己处理，本图无效果）",
         _attr = {
-            attack_green = "+33",
+            attack_white = "+10",
             xtras = {
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
@@ -35,8 +35,7 @@ local items = {
             target = "air,ground,friend,self,vuln,invu",
             attr = {
                 life = "+50",
-                agi_green = "+33",
-                attack_range = "+300",
+                attack_range = "+200",
             }
         },
     },
@@ -54,11 +53,11 @@ local items = {
         _weight = 3.1,
         _overlie = 1,
         _attr = {
-            defend = "+1",
             e_physical_append = '-1',
-            str_green = "+1",
-            agi_green = "+1",
-            int_green = "+1",
+            defend_green = "+1",
+            str_green = "+10",
+            agi_green = "+10",
+            int_green = "+10",
         },
     },
     {
@@ -82,7 +81,7 @@ local items = {
         _attr = {
             e_physical_attack = '+1',
             attack_green = "+50",
-            defend = "+2",
+            defend_white = "+5",
             xtras = {
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",

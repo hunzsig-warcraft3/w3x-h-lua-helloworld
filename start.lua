@@ -6,6 +6,15 @@ cj.TriggerAddAction(startTrigger, function()
     cj.DisableTrigger(startTrigger)
     cj.DestroyTrigger(startTrigger)
 
+    hattribute.setThreeBuff({
+        primary = 0,
+        str = nil,
+        agi = nil,
+        int = {
+            mana = 5,
+        }
+    })
+
     -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
     local uidMe = hunit.n2i("剑士")
     local uidEnemy = hunit.n2i("骑士")
@@ -20,7 +29,6 @@ cj.TriggerAddAction(startTrigger, function()
             attack_speed = "+50",
             life = "+5000",
             life_back = "+100",
-            attack_white = "+75",
             weight = "+100",
             -- 单位自身的暴击（自身的暴击可降低回避效果，伤害是在原伤害上加成，不独立计算）
             knocking_odds = "+10",
@@ -71,4 +79,5 @@ cj.TriggerAddAction(startTrigger, function()
             .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
             .. "暴击" .. evtData.damage .. "血")
     end)
+
 end)
