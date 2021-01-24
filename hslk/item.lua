@@ -80,13 +80,10 @@ local items = {
         _overlie = 1,
         _attr = {
             e_physical_attack = '+1',
+            attack_space = '-0.1',
             attack_green = "+50",
             defend_white = "+5",
             xtras = {
-                {
-                    on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
-                    odds = 10, percent = { 300, 2000 }, effect = nil
-                },
                 {
                     alias = "水蛇湍乱",
                     on = CONST_EVENT.attack, action = "targetUnit.spec.paw", val = 'damage',

@@ -26,7 +26,7 @@ cj.TriggerAddAction(startTrigger, function()
         y = 0,
         attr = {
             e_fire_attack = "+1", -- 附魔1层火
-            attack_speed = "+50",
+            attack_speed = "+5",
             life = "+5000",
             life_back = "+100",
             weight = "+100",
@@ -42,7 +42,7 @@ cj.TriggerAddAction(startTrigger, function()
                 -- 额外特效的暴击（回避可使此暴击无效，伤害独立）
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
-                    odds = 20, percent = { 100, 500 }, effect = nil
+                    odds = 20, percent = { 25, 125 }, effect = nil
                 },
                 -- 越暴击，火伤害越高！
                 {
@@ -65,7 +65,7 @@ cj.TriggerAddAction(startTrigger, function()
         qty = 2,
         attr = {
             attack_white = "+100",
-            life = "+100000",
+            life = "+500000",
             life_back = "+3000",
             damage_reduction = "+50",
         }
@@ -80,4 +80,10 @@ cj.TriggerAddAction(startTrigger, function()
             .. "暴击" .. evtData.damage .. "血")
     end)
 
+    htime.setInterval(0.5, function(curTimer)
+        local a = hattr.get(me, 'attack_space_origin')
+        local b = hattr.get(me, 'attack_speed')
+        local c = hattr.get(me, 'attack_space')
+        print("=", a, b, c)
+    end)
 end)
