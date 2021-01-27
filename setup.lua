@@ -15,10 +15,10 @@ hevent.onPlayerResourceChange(function(evtData)
         local val = math.floor(evtData.value)
         if (evtData.type == 'gold') then
             htextTag.style(htextTag.create2Unit(u, "+" .. val .. " 金", 6, "ffcc00", 1, 1.70, 60.00), "toggle", 0, 0.20)
-            hsound.sound2Unit(cg.gg_snd_ReceiveGold, 100, u)
+            hsound.voice2Unit(cg.gg_snd_ReceiveGold, 100, u)
         elseif (evtData.type == 'lumber') then
             htextTag.style(htextTag.create2Unit(u, "+" .. val .. " 木", 7, "80ff80", 1, 1.70, 60.00), "toggle", 0, 0.20)
-            hsound.sound2Unit(cg.gg_snd_BundleOfLumber, 100, u)
+            hsound.voice2Unit(cg.gg_snd_BundleOfLumber, 100, u)
         end
     end
 end)
