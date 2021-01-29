@@ -19,7 +19,7 @@ local items = {
         _active = "主动演示（效果需要自己处理，本图无效果）",
         _passive = "被动演示（效果需要自己处理，本图无效果）",
         _attr = {
-            attack_white = "+10",
+            attack = "+10", --smart
             xtras = {
                 {
                     on = CONST_EVENT.attack, action = "targetUnit.spec.knocking", val = "triggerUnit.attack",
@@ -54,9 +54,9 @@ local items = {
         _overlie = 1,
         _attr = {
             e_physical_append = '-1',
-            defend_green = "+1",
+            defend = "+1", --smart
             str_green = "+10",
-            agi_green = "+10",
+            agi = "+10", --smart
             int_green = "+10",
         },
     },

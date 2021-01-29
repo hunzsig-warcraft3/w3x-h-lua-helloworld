@@ -15,6 +15,28 @@ cj.TriggerAddAction(startTrigger, function()
         }
     })
 
+    -- 初始调试物品
+    hitem.create({
+        itemId = hitem.n2i("双铁剑"),
+        charges = 2,
+        x = 400,
+        y = 400,
+    })
+    for _ = 1, 12 do
+        hitem.create({
+            itemId = hitem.n2i("铁剑"),
+            charges = 1,
+            x = 156,
+            y = 785,
+        })
+        hitem.create({
+            itemId = hitem.n2i("铁盾"),
+            charges = 1,
+            x = 872,
+            y = 551,
+        })
+    end
+
     -- 这些ID只要正确使用了slkHelper，就可以根据名称获得ID，极其爽
     local uidMe = hunit.n2i("剑士")
     local uidEnemy = hunit.n2i("骑士")
@@ -33,6 +55,17 @@ cj.TriggerAddAction(startTrigger, function()
             -- 单位自身的暴击（自身的暴击可降低回避效果，伤害是在原伤害上加成，不独立计算）
             knocking_odds = "+10",
             knocking_extent = "+100",
+        }
+    })
+    table.insert(hhero.player_heroes[1], me)
+    -- 小绵羊信使
+    hunit.create({
+        whichPlayer = hplayer.players[1],
+        unitId = hunit.n2i("冷静的绵羊"),
+        x = 100,
+        y = 100,
+        attr = {
+            weight = "+10000", -- 负重
         }
     })
     onExp(me)
@@ -74,16 +107,11 @@ cj.TriggerAddAction(startTrigger, function()
     hevent.onDamage(me, function(evtData)
         haward.forUnitExp(evtData.triggerUnit, evtData.damage / 30)
     end)
+    -- 暴击时获得1黄金
     hevent.onKnocking(me, function(evtData)
+        haward.forUnitGold(evtData.triggerUnit, 1)
         print_mb(hunit.getName(evtData.triggerUnit)
             .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
             .. "暴击" .. evtData.damage .. "血")
-    end)
-
-    htime.setInterval(0.5, function(curTimer)
-        local a = hattr.get(me, 'attack_space_origin')
-        local b = hattr.get(me, 'attack_speed')
-        local c = hattr.get(me, 'attack_space')
-        print("=", a, b, c)
     end)
 end)

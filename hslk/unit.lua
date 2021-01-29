@@ -66,3 +66,27 @@ for _, v in pairs(heros) do
     v.race = "human"
     slkHelper.unit.hero(v)
 end
+
+-- 信使
+local couriers = {
+    {
+        Name = "冷静的绵羊",
+        Ubertip = "一只冷酷安静的绵羊，用毛茸茸的白毛携带物品",
+        unitSound = "Sheep",
+        file = "units\\critters\\Sheep\\Sheep",
+        Art = "ReplaceableTextures\\CommandButtons\\BTNSheep.blp",
+        modelScale = 1.50,
+        scale = 1.20,
+        moveHeight = 0,
+        targType = "ground",
+        armor = "Flesh",
+        HP = 500,
+        spd = 500,
+    },
+}
+for _, v in ipairs(couriers) do
+    v.race = "human"
+    v.HP = 100
+    v._auto_skill = true
+    slkHelper.unit.courier(v)
+end
