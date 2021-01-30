@@ -2,7 +2,7 @@ local heros = {
     {
         Name = "剑士",
         Propernames = "无名氏",
-        Ubertip = hColor.grey("身穿盔甲的战士，持剑作战，攻防兼备。"),
+        Ubertip = hcolor.grey("身穿盔甲的战士，持剑作战，攻防兼备。"),
         Art = "ReplaceableTextures\\CommandButtons\\BTNFootman.blp",
         file = "units\\human\\Footman\\Footman",
         unitSound = "Footman",
@@ -34,7 +34,7 @@ local heros = {
     {
         Name = "骑士",
         Propernames = "无名氏",
-        Ubertip = hColor.grey("骑架铁马的战士，冲锋陷阵，防御奇佳。"),
+        Ubertip = hcolor.grey("骑架铁马的战士，冲锋陷阵，防御奇佳。"),
         Art = "ReplaceableTextures\\CommandButtons\\BTNKnight.blp",
         file = "units\\human\\Knight\\Knight",
         unitSound = "Knight",
