@@ -12,6 +12,7 @@ cj.TriggerAddAction(startTrigger, function()
         agi = nil,
         int = {
             mana = 5,
+            mana_back = 0.1,
         }
     })
 
@@ -68,6 +69,7 @@ cj.TriggerAddAction(startTrigger, function()
             weight = "+10000", -- 负重
         }
     })
+    hunit.subCurMana(me, 100)
     onExp(me)
     hattr.set(me, 0, {
         xtras = {
@@ -110,7 +112,7 @@ cj.TriggerAddAction(startTrigger, function()
     -- 暴击时获得1黄金
     hevent.onKnocking(me, function(evtData)
         haward.forUnitGold(evtData.triggerUnit, 1)
-        print_mb(hunit.getName(evtData.triggerUnit)
+        echo(hunit.getName(evtData.triggerUnit)
             .. "攻击是" .. hattr.get(evtData.triggerUnit, 'attack') .. '点->'
             .. "暴击" .. evtData.damage .. "血")
     end)
